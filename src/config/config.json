@@ -1,10 +1,10 @@
 {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "projectId": "",
-    "storageBucket": "",
-    "messagingSenderId": ""
+    "apiKey": "AIzaSyAVDhCe0SvB3XTyEFVHlA0w9BKeXvGEcEs",
+    "authDomain": "keep-clone-13ced.firebaseapp.com",
+    "databaseURL": "https://keep-clone-13ced.firebaseio.com",
+    "projectId": "keep-clone-13ced",
+    "storageBucket": "keep-clone-13ced.appspot.com",
+    "messagingSenderId": "661712327195"
 }
 
 

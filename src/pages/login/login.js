@@ -88,7 +88,7 @@ componentWillUnmount() {
                 <Loader />
                 :
                     <div className="col-md-6 container box">
-                    <h1 class="form-head">KEEP CLONE</h1>
+                    <h1 className="form-head">KEEP CLONE</h1>
                         <form id="Login">
                             <div className="form-group">
                                 <input value={this.state.email} onChange={this.handleChange} name="email" type="email" className="form-control" id="inputEmail" placeholder="Email Address" />
