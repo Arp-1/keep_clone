@@ -21,9 +21,8 @@ export default class Note extends Component {
             this.cardText.current.appendChild(document.createTextNode(this.noteData));
     }
     render() {
-        //alert(this.noteData.src);
         return (
-            <div className="card" style={{width: 18 + 'rem'}}>
+            <div className="card" style={{width: 18 + 'rem',display:"inline-block",margin:"1%"}}>
                 <button onClick={()=> this.handleRemoveNote(this.noteId)} type="submit" className="cross">&times;</button>
                 <div className="card-body">
                     <h5 className="card-title">{this.noteTitle}</h5>
