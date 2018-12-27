@@ -22,12 +22,12 @@ export default class Note extends Component {
     }
     render() {
         return (
-            <div className="card" style={{width: 18 + 'rem',display:"inline-block",margin:"1%"}}>
+            <div className="card notes" style={{width: 18 + 'rem'}}>
                 <button onClick={()=> this.handleRemoveNote(this.noteId)} type="submit" className="cross">&times;</button>
-                <div className="card-body">
-                    <h5 className="card-title">{this.noteTitle}</h5>
-                    <hr></hr>
-                    <div className="card-text" ref={this.cardText}> </div>
+                <div className="card-body cdb">
+                    <h5 className="card-title cdt">{this.noteTitle}</h5>
+                    <hr className="hr"></hr>
+                    <div className="card-text cdte" ref={this.cardText}> </div>
                 </div>
             </div> 
         );
