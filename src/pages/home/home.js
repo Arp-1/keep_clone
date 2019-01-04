@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import {markdown} from 'markdown';
 import fire from '../../config/fire';
 import Note from '../note/note';
 import NoteForm from '../noteForm/noteForm';
 import './home.css';
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
-        this.uid = props.uid; 
+        this.uid = props.uid;
+        this.deleteAcc = this.deleteAcc.bind(this);
         this.logOut = this.logOut.bind(this);
         this.add = this.add.bind(this);
         this.addNote = this.addNote.bind(this);
@@ -30,14 +33,26 @@ export default class Home extends Component {
             {
                 var img = new Image();
                 img.src = snap.val().noteData;
+                let myNoteTitle = markdown.toHTML(snap.val().noteTitle)
                 this.setState({
-                    notes: this.state.notes.concat({id: snap.key, noteTitle: snap.val().noteTitle, noteData: img, noteList: undefined})
+                    notes: this.state.notes.concat({id: snap.key, noteTitle: myNoteTitle, noteData: img, noteList: []})
                 })
             }
             else
             {
+                let myNoteData = markdown.toHTML(snap.val().noteData);
+                let myNoteTitle = markdown.toHTML(snap.val().noteTitle), myNoteList = [];
+                if(snap.val().noteList)
+                {
+                    let listLen = snap.val().noteList.length;
+                    for(let i = 0; i < listLen; i++)
+                    {
+                        myNoteList.push(markdown.toHTML(snap.val().noteList[i]));
+                        console.log(myNoteList[i]);
+                    }
+                }
                 this.setState({
-                    notes: this.state.notes.concat({id: snap.key, noteTitle: snap.val().noteTitle, noteData: snap.val().noteData, noteList: snap.val().noteList})
+                    notes: this.state.notes.concat({id: snap.key, noteTitle: myNoteTitle, noteData: myNoteData, noteList: myNoteList})
                 })
             }
         })
@@ -82,6 +97,22 @@ export default class Home extends Component {
         else
             this.setState({addButton: true});
     }
+    async deleteAcc(e) {
+        e.preventDefault();
+        var r = window.confirm("Are you sure you want to delete your account. All your data will be deleted permanently.");
+        if (r == true) {
+            var user = fire.auth().currentUser;
+            user.delete().then(function() {
+            // User deleted.
+            alert('Delete successful.')
+            }, function(error) {
+            alert(error);
+            });
+        }
+        else {
+            alert("You pressed Cancel!");
+        }
+    }
     render() {
         return (
             <div>
@@ -90,6 +121,7 @@ export default class Home extends Component {
                 <button onClick={this.add} className="add"><span>+</span>AddNew</button>
                 <button onClick={this.logOut} type="submit" className="logout">LogOut</button>
             </header>
+            <button onClick={this.deleteAcc} type="submit" className="btn btn-danger delete">Delete Acc</button>
             <div className="contain">
             <div className="card cd">
             {this.state.addButton === true ?
